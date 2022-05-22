@@ -1,0 +1,83 @@
+Deixar aqui os exemplos para testar as Requisições. (Esse arquivo é temporário !!!)
+
+* Criação de Usuário*
+rota: http://localhost:8080/user
+metodo: POST
+Body: Json
+
+{
+"login": "lucaslucas@gmail.com",
+"password": "123lucas",
+"name": "Lucas Gatto",
+"aboutMe": "Tenho 20 anos e sou apaixonado pela culinaria japonesa.",
+"birthDay": "2000-05-29T00:00:00.000+00:00",
+"gender": "MASCULINO",
+"city": "Campina Grande",
+"position": "ZAGUEIRO",
+"foot": "PERNA_DIREITA",
+"height": 1.83,
+"weight": 78
+}
+-------------------------------------------------------------------------
+rota: http://localhost:8080/stats
+method: POST
+body: Json
+
+{
+    "user_id": 1,
+    "passing": 96,
+    "defence": 79,
+    "physical": 93,
+    "skills": 98,
+    "shooting": 97
+}
+
+-------------------------------------------------------------------------
+
+rota: http://localhost:8080/club/address
+method: POST
+body: Json
+
+{
+    "zip_code": "58402022",
+    "street_name": "Manoel Elias de Araújo",
+    "neighborhood": "Jardim Tavares",
+    "club_id": 3,
+    "city": "Campina Grande",
+    "state": "Paraíba",
+    "uf": "PB",
+    "location_name": "Arena 70 Sport & Bar"
+}
+
+-------------------------------------------------------------------------
+
+rota: http://localhost:8080/trials/create
+method: POST
+body: Json
+
+{
+    "club_id": 3,
+    "trial_name": "Testando Function 1",
+    "registration_limit": 79,
+    "start_date": "2021-09-23 13:27:13",
+    "end_date": "2021-09-23 16:28:16",
+    "zip_code": "74805100",
+	"street_name": "Fued José Sebba",
+    "neighborhood": "Jardim Goiás",
+    "city": "Goiânia",
+    "uf": "GO",
+	"location_name": "Estádio Serra Dourada"
+}
+
+-------------------------------------------------------------------------
+
+rota: http://localhost:8080/club
+method: POST
+body: Json
+
+{
+    "tradingName": "Sampaio Correa Futebol Clube",
+    "corporateName": "SAMPAIO CORREA FUTEBOL CLUBE",
+    "cnpj": "06048870000117"
+}
+
