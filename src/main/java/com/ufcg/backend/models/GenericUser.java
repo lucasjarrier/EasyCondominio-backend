@@ -16,7 +16,6 @@ import java.util.Date;
 @Setter
 @Entity
 @NoArgsConstructor
-@Table(name = "TB_GENERIC_USER")
 public class GenericUser {
 
     // SECURITY
