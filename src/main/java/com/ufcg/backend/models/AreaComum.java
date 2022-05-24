@@ -3,6 +3,7 @@ package com.ufcg.backend.models;
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 @Entity
@@ -15,6 +16,7 @@ public class AreaComum {
     private Long id;
 
     @Column
+    @NotNull
     private String name;
 
     @Column
@@ -25,7 +27,7 @@ public class AreaComum {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Column(unique = true)
-    private Set<Reserva> reservaList;
+    private Set<Reserva> reservedList;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Column(unique = true)
