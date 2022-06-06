@@ -45,6 +45,7 @@ public class GenericUserController {
         }
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
+        assert authentication != null;
         String token = tokenProvider.createTokenUser(authentication);
         Long idUser = genericUserRepository.findByLogin(user.getLogin()).getId();
         return ResponseEntity.ok(new AuthResponse(token, idUser));

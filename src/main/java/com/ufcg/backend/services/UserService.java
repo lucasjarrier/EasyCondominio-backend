@@ -31,11 +31,8 @@ public class UserService {
     }
 
     public RenderMoradorDTO findById(Long id) {
-        GenericUser userById = genericUserRepository.findByIdUser(id);
-        if(userById != null) {
-            return new RenderMoradorDTO(userById);
-        }
-        return null;
+        GenericUser userById = genericUserRepository.findById(id).get();
+        return new RenderMoradorDTO(userById);
     }
 
     public void delete(Long id){
