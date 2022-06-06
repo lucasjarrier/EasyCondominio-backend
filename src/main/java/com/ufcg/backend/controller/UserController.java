@@ -2,6 +2,8 @@ package com.ufcg.backend.controller;
 
 import com.ufcg.backend.dto.UserDTO;
 import com.ufcg.backend.dto.renderDTO.RenderMoradorDTO;
+import com.ufcg.backend.security.CurrentUser;
+import com.ufcg.backend.security.UserPrincipal;
 import com.ufcg.backend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,5 +56,12 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<RenderMoradorDTO> userUpdate(@RequestBody UserDTO user, @PathVariable Long id) {
         return new ResponseEntity<>(userService.updateUser(user,id), HttpStatus.ACCEPTED);
+    }
+
+    // OK
+    // RETORNA O ID DO USUARIO PELO TOKEN DA REQUISIÇÃO
+    @GetMapping("/getUserByToken")
+    public ResponseEntity<RenderMoradorDTO> getIdUserByToken(@CurrentUser UserPrincipal userPrincipal) {
+        return new ResponseEntity<>(userService.findById(userPrincipal.getUser().getId()), HttpStatus.ACCEPTED);
     }
  }
