@@ -5,8 +5,6 @@ import com.ufcg.backend.models.GenericUser;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-
 @Getter
 @NoArgsConstructor
 public class RenderMoradorDTO {
