@@ -1,5 +1,6 @@
 package com.ufcg.backend.models;
 
+import com.ufcg.backend.enums.OperatingTime;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -32,4 +33,15 @@ public class AreaComum {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @Column(unique = true)
     private Set<Reserva> solicitationList;
+
+    @Column
+    private Integer tempoPorReserva;
+
+    @Column
+    private OperatingTime operatingTime;
+
+    public void cleanReservas() {
+        this.reservedList.clear();
+        this.solicitationList.clear();
+    }
 }

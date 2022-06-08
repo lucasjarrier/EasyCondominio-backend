@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
@@ -23,14 +24,26 @@ public class Reserva {
     private Integer idAreaComum;
 
     @Column
-    private Integer idUser;
+    private Long idUser;
 
     @Column
-    private Date dataReserva;
+    private String hrInicioReserva;
 
-    public Reserva(Integer idAreaComum, Integer idUser, Date dataReserva) {
+    @Column
+    private String hrFimReserva;
+
+    @Column
+    private String dtReserva;
+
+    public Reserva(Integer idAreaComum, Long idUser, String hrInicioReserva, String hrFimReserva) {
         this.idAreaComum = idAreaComum;
         this.idUser = idUser;
-        this.dataReserva = dataReserva;
+        this.hrInicioReserva = hrInicioReserva;
+        this.hrFimReserva = hrFimReserva;
+        /*
+         * Salva o dia atual da reserva.
+         */
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        this.dtReserva = formatter.format(new Date());
     }
 }

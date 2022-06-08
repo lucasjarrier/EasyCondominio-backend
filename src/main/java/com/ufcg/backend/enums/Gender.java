@@ -2,6 +2,7 @@ package com.ufcg.backend.enums;
 
 import lombok.Getter;
 
+
 @Getter
 public enum Gender {
 
@@ -9,7 +10,7 @@ public enum Gender {
     FEMININO("Feminino"),
     NAO_INFORMADO("Não Declarado");
 
-    private String state;
+    private final String state;
 
     Gender(String state) {
     this.state = state;

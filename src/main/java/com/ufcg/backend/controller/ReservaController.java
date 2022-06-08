@@ -1,6 +1,9 @@
 package com.ufcg.backend.controller;
 
+import com.ufcg.backend.dto.renderDTO.RenderReservaDTO;
 import com.ufcg.backend.models.Reserva;
+import com.ufcg.backend.security.CurrentUser;
+import com.ufcg.backend.security.UserPrincipal;
 import com.ufcg.backend.services.ReservaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,7 +31,29 @@ public class ReservaController {
     }
 
     @GetMapping("/{idArea}")
-    public ResponseEntity<List<Reserva>> listarTodasReservasByIdArea(@PathVariable Long idArea) {
+    public ResponseEntity<List<RenderReservaDTO>> listarTodasReservasByIdArea(@PathVariable Long idArea) {
         return new ResponseEntity<>(reservaService.getAllReservaByIrArea(idArea), HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("/{idReserva}")
+    public ResponseEntity<HttpStatus> cancelarReservasById(@PathVariable Long idReserva) {
+        try {
+            reservaService.removeReservaFromId(idReserva);
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+    @PutMapping("/fazer-reserva/{idReserva}")
+    public ResponseEntity<HttpStatus> fazerReservasById(@PathVariable Long idReserva, @CurrentUser UserPrincipal userPrincipal) {
+        try {
+            reservaService.fazerReservasById(idReserva, userPrincipal.getId());
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }
