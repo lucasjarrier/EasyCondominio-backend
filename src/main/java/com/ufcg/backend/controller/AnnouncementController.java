@@ -38,4 +38,10 @@ public class AnnouncementController {
         announcementService.deleteAllAnnouncement();
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> deleteAnnouncementById(@PathVariable Long id) {
+        announcementService.deleteAnnouncement(id);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
 }
