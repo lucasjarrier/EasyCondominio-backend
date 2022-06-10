@@ -7,6 +7,7 @@ import com.ufcg.backend.repositories.GenericUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
@@ -23,6 +24,9 @@ public class UserService {
     @Autowired
     private GenericUserRepository genericUserRepository;
 
+    @Autowired
+    private ReservaService reservaService;
+
     public @Valid UserDTO save(@Valid UserDTO user)  {
         GenericUser novoUser = new GenericUser(user);
         novoUser.setPassword(passwordEncoded.encode(user.getPassword()));
@@ -35,9 +39,13 @@ public class UserService {
         return new RenderMoradorDTO(userById);
     }
 
+    @Transactional
     public void delete(Long id){
         if(findById(id) != null) {
             genericUserRepository.deleteById(id);
+            if(reservaService.getTotalReservasByIdUser(id) > 0) {
+                reservaService.deletarReservasByIdUser(id);
+            }
         }
     }
 

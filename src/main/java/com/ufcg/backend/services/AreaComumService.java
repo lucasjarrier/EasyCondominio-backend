@@ -4,6 +4,7 @@ import com.ufcg.backend.models.AreaComum;
 import com.ufcg.backend.repositories.AreaComumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,9 @@ public class AreaComumService {
 
     @Autowired
     private AreaComumRepository areaComumRepository;
+
+    @Autowired
+    private ReservaService reservaService;
 
     public AreaComum save(AreaComum areaComum) {
         return areaComumRepository.save(areaComum);
@@ -26,11 +30,11 @@ public class AreaComumService {
         return areaComumRepository.findById(id).orElse(null);
     }
 
-    public Boolean deleteAreaById(Long id) {
+    @Transactional
+    public void deleteAreaById(Long id) {
         if(getAreaComumById(id) != null) {
             areaComumRepository.deleteById(id);
-            return true;
+            reservaService.deletarReservasByIdArea(id);
         }
-        return false;
     }
  }

@@ -26,4 +26,10 @@ public class AreaComumController {
     public ResponseEntity<List<AreaComum>> getAllAreas() {
         return new ResponseEntity<>(areaComumService.getAllAreas(), HttpStatus.ACCEPTED);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> deleteAreaById(@PathVariable Long id) {
+        areaComumService.deleteAreaById(id);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
 }

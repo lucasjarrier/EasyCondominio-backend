@@ -54,4 +54,16 @@ public class ReservaService {
             reservaRepository.save(reserva);
         }
     }
+
+    public void deletarReservasByIdArea(Long id) {
+        reservaRepository.deleteAllByIdArea(id);
+    }
+
+    public void deletarReservasByIdUser(Long id) {
+        reservaRepository.deleteAllByIdUser(id);
+    }
+
+    public Integer getTotalReservasByIdUser(Long id) {
+        return reservaRepository.getTotalReservasByIdUser(id);
+    }
 }
