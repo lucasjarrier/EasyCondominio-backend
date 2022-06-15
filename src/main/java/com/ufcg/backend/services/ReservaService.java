@@ -56,7 +56,9 @@ public class ReservaService {
     }
 
     public void deletarReservasByIdArea(Long id) {
-        reservaRepository.deleteAllByIdArea(id);
+        if(!reservaRepository.getAllReservaByIdArea(id).isEmpty()) {
+            reservaRepository.deleteAllByIdArea(id);
+        }
     }
 
     public void deletarReservasByIdUser(Long id) {

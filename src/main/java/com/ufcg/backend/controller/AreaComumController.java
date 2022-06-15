@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -18,8 +19,10 @@ public class AreaComumController {
     private AreaComumService areaComumService;
 
     @PostMapping
-    public ResponseEntity<AreaComum> salvarAreaComum(@RequestBody AreaComum areaComum) {
-        return new ResponseEntity<>(areaComumService.save(areaComum), HttpStatus.CREATED);
+    public ResponseEntity<AreaComum> salvarAreaComum(@RequestBody AreaComum areaComum, @RequestParam("file") MultipartFile photo) throws Exception {
+        AreaComum area = areaComumService.save(areaComum, photo);
+        areaComumService.criarReservaAutomatica();
+        return new ResponseEntity<>(area, HttpStatus.CREATED);
     }
 
     @GetMapping

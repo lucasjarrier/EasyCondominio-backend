@@ -5,6 +5,7 @@ import com.ufcg.backend.repositories.AreaComumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,8 +19,29 @@ public class AreaComumService {
     @Autowired
     private ReservaService reservaService;
 
-    public AreaComum save(AreaComum areaComum) {
-        return areaComumRepository.save(areaComum);
+    @Autowired
+    private AutoSistemService autoSistemService;
+
+    public AreaComum save(AreaComum areaComum, MultipartFile photo) throws Exception {
+        AreaComum areaComum1 = areaComumRepository.save(areaComum);
+        this.uploadPhoto(areaComum1.getId(), photo);
+        return areaComum1;
+    }
+
+    public void uploadPhoto(Long id, MultipartFile photo) throws Exception {
+        try {
+            byte[] bytes = photo.getBytes();
+            AreaComum areaComum = this.areaComumRepository.findById(id).get();
+            areaComum.setPhoto(bytes);
+            this.areaComumRepository.save(areaComum);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Erro ao salvar foto!");
+        }
+    }
+
+    public void criarReservaAutomatica() {
+        autoSistemService.createReservasDiarias();
     }
 
     public List<AreaComum> getAllAreas() {
@@ -32,9 +54,9 @@ public class AreaComumService {
 
     @Transactional
     public void deleteAreaById(Long id) {
-        if(getAreaComumById(id) != null) {
+        if (getAreaComumById(id) != null) {
             areaComumRepository.deleteById(id);
             reservaService.deletarReservasByIdArea(id);
         }
     }
- }
+}
