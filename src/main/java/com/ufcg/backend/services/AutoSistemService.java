@@ -28,7 +28,7 @@ public class AutoSistemService {
     public void createReservasDiarias() {
         List<AreaComum> areaComumList = areaComumRepository.findAll();
         for (AreaComum areaComum : areaComumList) {
-            if (areaComum.getReservedList().size() == 0) {
+            if (areaComum.getReservedList() != null && areaComum.getReservedList().size() == 0) {
                 OperatingTime ot = areaComum.getOperatingTime();
                 if (areaComum.getTempoPorReserva() == 1 || true) {
                     for (String i : areaComum.getOperatingTime().getReservas(ot)) {

@@ -1,5 +1,6 @@
 package com.ufcg.backend.services;
 
+import com.ufcg.backend.dto.AreaDTO;
 import com.ufcg.backend.models.AreaComum;
 import com.ufcg.backend.repositories.AreaComumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,12 +23,13 @@ public class AreaComumService {
     @Autowired
     private AutoSistemService autoSistemService;
 
-    public AreaComum save(AreaComum areaComum, MultipartFile photo) throws Exception {
-        AreaComum areaComum1 = areaComumRepository.save(areaComum);
-        this.uploadPhoto(areaComum1.getId(), photo);
-        return areaComum1;
+    public void save(AreaDTO areaDTO) throws Exception {
+        areaComumRepository.save(new AreaComum(areaDTO));
     }
 
+    /**
+     * Refazer esse metodo!
+     */
     public void uploadPhoto(Long id, MultipartFile photo) throws Exception {
         try {
             byte[] bytes = photo.getBytes();
