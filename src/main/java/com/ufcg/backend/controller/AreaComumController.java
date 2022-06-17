@@ -1,5 +1,7 @@
 package com.ufcg.backend.controller;
 
+import com.ufcg.backend.dto.AreaDTO;
+import com.ufcg.backend.enums.OperatingTime;
 import com.ufcg.backend.models.AreaComum;
 import com.ufcg.backend.services.AreaComumService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-
 @RequestMapping("/area-comum")
 public class AreaComumController {
 
@@ -18,8 +19,10 @@ public class AreaComumController {
     private AreaComumService areaComumService;
 
     @PostMapping
-    public ResponseEntity<AreaComum> salvarAreaComum(@RequestBody AreaComum areaComum) {
-        return new ResponseEntity<>(areaComumService.save(areaComum), HttpStatus.CREATED);
+    public ResponseEntity<HttpStatus> salvarAreaComum(@RequestBody AreaDTO areaDTO) throws Exception {
+        areaComumService.save(areaDTO);
+        areaComumService.criarReservaAutomatica();
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping
