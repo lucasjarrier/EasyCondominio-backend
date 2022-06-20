@@ -3,6 +3,7 @@ com/ufcg/backend/security/AuthResponse.class
 com/ufcg/backend/security/GenericResponse.class
 com/ufcg/backend/repositories/GenericUserRepository.class
 com/ufcg/backend/services/UserService.class
+com/ufcg/backend/dto/AreaDTO.class
 com/ufcg/backend/dto/renderDTO/RenderMoradorDTO.class
 com/ufcg/backend/repositories/AreaComumRepository.class
 com/ufcg/backend/services/GenderService.class
