@@ -21,6 +21,8 @@ public class RenderMoradorDTO {
 
     private byte[] photo;
 
+    private boolean isAdmin;
+
     public RenderMoradorDTO(GenericUser user) {
         this.phoneNumber = user.getPhoneNumber();
         this.id = user.getId();
@@ -28,5 +30,6 @@ public class RenderMoradorDTO {
         this.gender = user.getGender();
         this.photo = user.getPhoto();
         this.apartment = user.getApartment();
+        this.isAdmin = user.getIsAdmin();
     }
 }

@@ -53,7 +53,7 @@ public class GenericUser {
 
     // GENERAL INFORMATION
     @Column
-    private Boolean isNormalUser;
+    private Boolean isAdmin;
 
     public GenericUser(UserDTO userDTO) {
         this.login = userDTO.getLogin();
@@ -62,6 +62,6 @@ public class GenericUser {
         this.gender = userDTO.getGender();
         this.phoneNumber = userDTO.getPhoneNumber();
         this.apartment = userDTO.getApartment();
-        this.isNormalUser = true;
+        this.isAdmin = false;
     }
 }

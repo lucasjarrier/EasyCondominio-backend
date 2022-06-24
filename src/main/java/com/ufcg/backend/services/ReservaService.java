@@ -68,4 +68,15 @@ public class ReservaService {
     public Integer getTotalReservasByIdUser(Long id) {
         return reservaRepository.getTotalReservasByIdUser(id);
     }
+
+    public List<RenderReservaDTO> getReservasByIdUser(Long id) {
+        List<RenderReservaDTO> reservaList = new ArrayList<>();
+        for(Reserva reserva: reservaRepository.findAllByIdUser(id)) {
+            new RenderMoradorDTO();
+            RenderMoradorDTO renderMoradorDTO;
+            renderMoradorDTO = userService.findById(reserva.getIdUser());
+            reservaList.add(new RenderReservaDTO(reserva, renderMoradorDTO));
+        }
+        return reservaList;
+    }
 }

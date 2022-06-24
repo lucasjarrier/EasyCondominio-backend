@@ -35,11 +35,15 @@ public class Reserva {
     @Column
     private String dtReserva;
 
-    public Reserva(Integer idAreaComum, Long idUser, String hrInicioReserva, String hrFimReserva) {
+    @Column
+    private String nameArea;
+
+    public Reserva(Integer idAreaComum, Long idUser, String hrInicioReserva, String hrFimReserva, String nameArea) {
         this.idAreaComum = idAreaComum;
         this.idUser = idUser;
         this.hrInicioReserva = hrInicioReserva;
         this.hrFimReserva = hrFimReserva;
+        this.nameArea = nameArea;
         /*
          * Salva o dia atual da reserva.
          */

@@ -79,7 +79,7 @@ public class UserService {
         List<RenderMoradorDTO> userList = new ArrayList<>();
 
         for(GenericUser user : genericUserRepository.findAll()) {
-            if(user.getIsNormalUser()) userList.add(new RenderMoradorDTO(user));
+            if(!user.getIsAdmin()) userList.add(new RenderMoradorDTO(user));
         }
         return userList;
     }
