@@ -32,13 +32,13 @@ public class AutoSistemService {
                 OperatingTime ot = areaComum.getOperatingTime();
                 if (areaComum.getTempoPorReserva() == 1 || true) {
                     for (String i : areaComum.getOperatingTime().getReservas(ot)) {
-                        Reserva reserva = new Reserva(Math.toIntExact(areaComum.getId()), 0L, i + ":00h", (Integer.parseInt(i) + 1) + ":00h");
+                        Reserva reserva = new Reserva(Math.toIntExact(areaComum.getId()), 0L, i + ":00h", (Integer.parseInt(i) + 1) + ":00h", areaComum.getName());
                         areaComum.getReservedList().add(reserva);
                     }
                 } else {
                     for (String i : areaComum.getOperatingTime().getReservas(ot)) {
-                        Reserva reserva = new Reserva(Math.toIntExact(areaComum.getId()), 0L, i + ":00h", (Integer.parseInt(i) + 1) + ":00h");
-                        Reserva reserva2 = new Reserva(Math.toIntExact(areaComum.getId()), 0L, i + ":30m", (Integer.parseInt(i) + 1) + ":00h");
+                        Reserva reserva = new Reserva(Math.toIntExact(areaComum.getId()), 0L, i + ":00h", (Integer.parseInt(i) + 1) + ":00h", areaComum.getName());
+                        Reserva reserva2 = new Reserva(Math.toIntExact(areaComum.getId()), 0L, i + ":30m", (Integer.parseInt(i) + 1) + ":00h", areaComum.getName());
                         areaComum.getReservedList().add(reserva);
                         areaComum.getReservedList().add(reserva2);
                     }

@@ -14,6 +14,8 @@ public interface ReservaRepository extends JpaRepository<Reserva, Long> {
     @Query(value = "select r.* from reserva r where r.id_area_comum = :idArea order by r.hr_inicio_reserva asc", nativeQuery = true)
     List<Reserva> getAllReservaByIdArea(@Param("idArea") Long idArea);
 
+    List<Reserva> findAllByIdUser(Long idUser);
+
     @Query(value = "delete from reserva r where r.id_area_comum = :idArea", nativeQuery = true)
     void deleteAllByIdArea(@Param("idArea") Long idArea);
 
