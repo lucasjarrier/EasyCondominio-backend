@@ -36,7 +36,7 @@ public class GenericUserController {
         try {
             authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(
-                            user.getLogin(),
+                            user.getLogin().toLowerCase(),
                             user.getPassword()
                     )
             );
