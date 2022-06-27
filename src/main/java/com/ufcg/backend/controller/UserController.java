@@ -64,4 +64,10 @@ public class UserController {
     public ResponseEntity<RenderMoradorDTO> getIdUserByToken(@CurrentUser UserPrincipal userPrincipal) {
         return new ResponseEntity<>(userService.findById(userPrincipal.getUser().getId()), HttpStatus.ACCEPTED);
     }
+
+    @PutMapping("/setUserAdminById/{id}")
+    public ResponseEntity<HttpStatus> setUserAdminById(@PathVariable Long id) {
+        userService.setUserAdminById(id);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+    }
  }
