@@ -30,6 +30,6 @@ public class RenderMoradorDTO {
         this.gender = user.getGender();
         this.photo = user.getPhoto();
         this.apartment = user.getApartment();
-        this.isAdmin = user.getIsAdmin();
+        this.isAdmin = (user.getIsAdmin() != null && user.getIsAdmin());
     }
 }

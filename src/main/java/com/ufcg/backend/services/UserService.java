@@ -75,11 +75,9 @@ public class UserService {
     }
 
     public List<RenderMoradorDTO> getAllUsers() {
-
         List<RenderMoradorDTO> userList = new ArrayList<>();
-
-        for(GenericUser user : genericUserRepository.findAll()) {
-            if(!user.getIsAdmin()) userList.add(new RenderMoradorDTO(user));
+        for(GenericUser user : genericUserRepository.findAllMoradores()) {
+            userList.add(new RenderMoradorDTO(user));
         }
         return userList;
     }
@@ -93,6 +91,14 @@ public class UserService {
         }catch(Exception e){
             e.printStackTrace();
             throw new Exception("Internal error on upload photo");
+        }
+    }
+
+    public void setUserAdminById(Long id) {
+        GenericUser genericUser = genericUserRepository.findById(id).orElse(null);
+        if(genericUser != null) {
+            genericUser.setIsAdmin(true);
+            genericUserRepository.save(genericUser);
         }
     }
 }

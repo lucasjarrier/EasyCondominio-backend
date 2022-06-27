@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.Locale;
 
 @Getter
 @Setter
@@ -56,7 +57,7 @@ public class GenericUser {
     private Boolean isAdmin;
 
     public GenericUser(UserDTO userDTO) {
-        this.login = userDTO.getLogin();
+        this.login = userDTO.getLogin().toLowerCase();
         this.password = userDTO.getPassword();
         this.name = userDTO.getName();
         this.gender = userDTO.getGender();
