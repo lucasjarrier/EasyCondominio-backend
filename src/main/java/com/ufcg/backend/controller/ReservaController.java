@@ -57,8 +57,8 @@ public class ReservaController {
         return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
-    @GetMapping("/listarReservasByIdUser/{idUser}")
-    public ResponseEntity<List<RenderReservaDTO>> getAllReservasByIdUser(@PathVariable Long idUser, @CurrentUser UserPrincipal userPrincipal) {
-        return new ResponseEntity<>(reservaService.getReservasByIdUser(idUser), HttpStatus.ACCEPTED);
+    @GetMapping("/listarReservasByUserLogado")
+    public ResponseEntity<List<RenderReservaDTO>> getAllReservasByIdUser(@CurrentUser UserPrincipal userPrincipal) {
+        return new ResponseEntity<>(reservaService.getReservasByIdUser(userPrincipal.getUser().getId()), HttpStatus.ACCEPTED);
     }
 }
