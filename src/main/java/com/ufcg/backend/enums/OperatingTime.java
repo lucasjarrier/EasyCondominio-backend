@@ -1,8 +1,5 @@
 package com.ufcg.backend.enums;
 
-import lombok.Getter;
-
-@Getter
 public enum OperatingTime {
 
     MATUTINO("Manhã"),
@@ -19,20 +16,23 @@ public enum OperatingTime {
     private final String[] total = {"08", "09", "10", "11", "12", "14", "15", "16", "17", "18", "19", "20", "21"};
 
     OperatingTime(String state) {
-    this.state = state;
+        this.state = state;
     }
 
+    public String getState() {
+        return state;
+    }
 
     /**
      * O default vai ser o horário completo.
      */
     public String[] getReservas(OperatingTime tipo) {
-        if (tipo.equals(MATUTINO)) {
-           return this.manha;
-        } else if (tipo.equals(VESPERTINO)) {
-            return this.tarde;
-        } else  {
-            return this.total;
+        if (tipo == MATUTINO) {
+            return manha;
+        } else if (tipo == VESPERTINO) {
+            return tarde;
+        } else {
+            return total;
         }
     }
 }

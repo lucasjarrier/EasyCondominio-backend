@@ -1,8 +1,6 @@
 package com.ufcg.backend.security;
 
 import com.ufcg.backend.models.GenericUser;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,9 +9,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
 
-
-@Getter
-@Setter
 public class UserPrincipal implements UserDetails {
 
     private Long id;
@@ -31,11 +26,9 @@ public class UserPrincipal implements UserDetails {
         this.password = user.getPassword();
     }
 
-
     public static UserPrincipal create(GenericUser user) {
-        if(user != null) {
-            return new UserPrincipal(user.getId(),user, Collections.
-                    singletonList(new SimpleGrantedAuthority("ROLE_USER")));
+        if (user != null) {
+            return new UserPrincipal(user.getId(), user, Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
         }
         return null;
     }
@@ -79,12 +72,11 @@ public class UserPrincipal implements UserDetails {
         this.attributes = attributes;
     }
 
-    public Long getId(){
+    public Long getId() {
         return id;
     }
 
-    public GenericUser getUser(){
+    public GenericUser getUser() {
         return user;
     }
 }
-

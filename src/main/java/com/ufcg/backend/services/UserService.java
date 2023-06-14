@@ -97,7 +97,7 @@ public class UserService {
     public void setUserAdminById(Long id) {
         GenericUser genericUser = genericUserRepository.findById(id).orElse(null);
         if(genericUser != null) {
-            genericUser.setIsAdmin(true);
+            genericUser.setAdmin(true);
             genericUserRepository.save(genericUser);
         }
     }

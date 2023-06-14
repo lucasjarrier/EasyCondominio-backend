@@ -1,9 +1,5 @@
 package com.ufcg.backend.enums;
 
-import lombok.Getter;
-
-
-@Getter
 public enum Gender {
 
     MASCULINO("Masculino"),
@@ -13,6 +9,10 @@ public enum Gender {
     private final String state;
 
     Gender(String state) {
-    this.state = state;
+        this.state = state;
+    }
+
+    public String getState() {
+        return state;
     }
 }

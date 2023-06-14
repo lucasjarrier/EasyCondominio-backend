@@ -1,10 +1,5 @@
 package com.ufcg.backend.models;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -13,10 +8,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-@Getter
-@Setter
-@Data
-@NoArgsConstructor
 public class Announcement {
 
     @Id
@@ -35,6 +26,10 @@ public class Announcement {
 
     private Boolean notExpire;
 
+    public Announcement() {
+        // Construtor vazio necessário para a entidade do JPA
+    }
+
     public Announcement(String title, String description, Date dtExpire, Boolean important, Boolean notExpire) {
         this.title = title;
         this.description = description;
@@ -45,5 +40,61 @@ public class Announcement {
         // Salva a data de criação automaticamente.
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         this.dtCreated = formatter.format(new Date());
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDtCreated() {
+        return dtCreated;
+    }
+
+    public void setDtCreated(String dtCreated) {
+        this.dtCreated = dtCreated;
+    }
+
+    public Date getDtExpire() {
+        return dtExpire;
+    }
+
+    public void setDtExpire(Date dtExpire) {
+        this.dtExpire = dtExpire;
+    }
+
+    public Boolean getImportant() {
+        return important;
+    }
+
+    public void setImportant(Boolean important) {
+        this.important = important;
+    }
+
+    public Boolean getNotExpire() {
+        return notExpire;
+    }
+
+    public void setNotExpire(Boolean notExpire) {
+        this.notExpire = notExpire;
     }
 }

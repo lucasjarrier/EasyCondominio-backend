@@ -1,7 +1,8 @@
 package com.ufcg.backend.security;
 
 import com.ufcg.backend.services.CustomerUserDetailsService;
-import lombok.extern.log4j.Log4j2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,14 +17,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@Log4j2
 public class TokenAuthenticatorFilter extends OncePerRequestFilter {
 
-    @Autowired
+    private static final Logger log = LoggerFactory.getLogger(TokenAuthenticatorFilter.class);
+
     private TokenProvider tokenProvider;
+    private CustomerUserDetailsService userDetailsService;
 
     @Autowired
-    private CustomerUserDetailsService userDetailsService;
+    public TokenAuthenticatorFilter(TokenProvider tokenProvider, CustomerUserDetailsService userDetailsService) {
+        this.tokenProvider = tokenProvider;
+        this.userDetailsService = userDetailsService;
+    }
+
+    public TokenAuthenticatorFilter() {
+
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
@@ -54,5 +63,3 @@ public class TokenAuthenticatorFilter extends OncePerRequestFilter {
         return null;
     }
 }
-
-

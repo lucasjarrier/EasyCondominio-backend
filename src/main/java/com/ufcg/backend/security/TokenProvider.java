@@ -1,18 +1,26 @@
 package com.ufcg.backend.security;
 
-import io.jsonwebtoken.*;
-import lombok.extern.log4j.Log4j2;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.Jws;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.SignatureException;
+import io.jsonwebtoken.UnsupportedJwtException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
-@Log4j2
 @Service
 public class TokenProvider {
 
-    public String createTokenUser(Authentication authentication) {
+    private static final Logger log = LoggerFactory.getLogger(TokenProvider.class);
 
+    public String createTokenUser(Authentication authentication) {
         UserPrincipal userPrincipal = (UserPrincipal) authentication.getPrincipal();
 
         Date now = new Date();
@@ -24,9 +32,7 @@ public class TokenProvider {
                 .setExpiration(expiryDate)
                 .signWith(SignatureAlgorithm.HS512, Config.secret)
                 .compact();
-
     }
-
 
     public Long getUserIdFromToken(String token) {
         Claims claims = Jwts.parser()
@@ -36,9 +42,10 @@ public class TokenProvider {
 
         return Long.parseLong(claims.getSubject());
     }
+
     public boolean validateToken(String authToken) {
         try {
-            Jwts.parser().setSigningKey(Config.secret).parseClaimsJws(authToken);
+            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(Config.secret).parseClaimsJws(authToken);
             return true;
         } catch (SignatureException ex) {
             log.error("Invalid JWT signature");
@@ -49,10 +56,8 @@ public class TokenProvider {
         } catch (UnsupportedJwtException ex) {
             log.error("Unsupported JWT token");
         } catch (IllegalArgumentException ex) {
-            log.error("JWT claims string is empty.");
+            log.error("JWT claims string is empty");
         }
         return false;
     }
-
 }
-
